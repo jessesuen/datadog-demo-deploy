@@ -1,0 +1,14 @@
+env: staging
+
+image:
+  tag: yellow
+
+replicaCount: 1
+
+ingress:
+  enabled: true
+  hosts:
+    - host: dd-staging.demo.akuity.io
+      paths:
+        - path: /
+          pathType: ImplementationSpecific

@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: dd-rollouts-demo
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "dd-rollouts-demo.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "dd-rollouts-demo.selectorLabels" . | nindent 4 }}
