@@ -14,10 +14,10 @@ apiVersion: extensions/v1beta1
 {{- end }}
 kind: Ingress
 metadata:
-  name: dd-rollouts-demo
+  name: datadog-demo
   namespace: {{ .Release.Namespace }}
   labels:
-    {{- include "dd-rollouts-demo.labels" . | nindent 4 }}
+    {{- include "datadog-demo.labels" . | nindent 4 }}
   {{- with .Values.ingress.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
@@ -49,11 +49,11 @@ spec:
             backend:
               {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
               service:
-                name: dd-rollouts-demo
+                name: datadog-demo
                 port:
                   number: {{ $svcPort }}
               {{- else }}
-              serviceName: dd-rollouts-demo
+              serviceName: datadog-demo
               servicePort: {{ $svcPort }}
               {{- end }}
           {{- end }}

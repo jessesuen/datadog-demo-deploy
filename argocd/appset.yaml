@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: datadog-demo
+  namespace: argocd
+spec:
+  generators:
+  - git:
+      repoURL: https://github.com/jessesuen/datadog-demo-deploy.git
+      revision: HEAD
+      directories:
+      - path: env/*
+  template:
+    metadata:
+      name: datadog-demo-{{path.basename}}
+      annotations:
+        kargo.akuity.io/authorized-stage: datadog-demo:{{path.basename}}
+    spec:
+      destination:
+        namespace: datadog-demo-{{path.basename}}
+        name: demo
+      project: datadog-demo
+      source:
+        path: charts/datadog-demo
+        repoURL: https://github.com/jessesuen/datadog-demo-deploy.git
+        helm:
+          valueFiles:
+          - "/env/{{path.basename}}/values.yaml"

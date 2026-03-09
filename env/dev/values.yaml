@@ -1,0 +1,14 @@
+env: dev
+
+image:
+  tag: v0.1.0
+
+replicaCount: 1
+
+ingress:
+  enabled: true
+  hosts:
+    - host: kargo-demo-dev.demo.akuity.io
+      paths:
+        - path: /
+          pathType: ImplementationSpecific

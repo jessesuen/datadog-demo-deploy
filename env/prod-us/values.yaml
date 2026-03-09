@@ -1,14 +1,14 @@
-env: dev
+env: prod
 
 image:
-  tag: orange
+  tag: v0.1.0
 
 replicaCount: 1
 
 ingress:
   enabled: true
   hosts:
-    - host: dd-dev.demo.akuity.io
+    - host: kargo-demo-prod-us.demo.akuity.io
       paths:
         - path: /
           pathType: ImplementationSpecific

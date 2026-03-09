@@ -1,5 +1,5 @@
 image:
-  repository: ghcr.io/jessesuen/dd-rollouts-demo
+  repository: ghcr.io/jessesuen/datadog-demo
   pullPolicy: IfNotPresent
   tag: red
 

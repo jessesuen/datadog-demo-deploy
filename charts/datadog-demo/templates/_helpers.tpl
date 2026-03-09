@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "dd-rollouts-demo.name" -}}
+{{- define "datadog-demo.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "dd-rollouts-demo.fullname" -}}
+{{- define "datadog-demo.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "dd-rollouts-demo.chart" -}}
+{{- define "datadog-demo.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "dd-rollouts-demo.labels" -}}
-helm.sh/chart: {{ include "dd-rollouts-demo.chart" . }}
-{{ include "dd-rollouts-demo.selectorLabels" . }}
+{{- define "datadog-demo.labels" -}}
+helm.sh/chart: {{ include "datadog-demo.chart" . }}
+{{ include "datadog-demo.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,7 +45,7 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "dd-rollouts-demo.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "dd-rollouts-demo.name" . }}
+{{- define "datadog-demo.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "datadog-demo.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}

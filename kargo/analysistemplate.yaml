@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: apm-error-rate
+  namespace: datadog-demo
+spec:
+  args:
+  - name: service-name
+  - name: env
+  metrics:
+  - count: 3
+    failureCondition: default(result, 0) > 0
+    failureLimit: 1
+    interval: 30s
+    name: error-rate
+    provider:
+      datadog:
+        apiVersion: v2
+        interval: 5m
+        # sum:requests.error.rate{service:{{args.service-name}}}
+        query: |
+          apm.service.request.error_rate{env:{{args.env}},service:{{args.service-name}}}

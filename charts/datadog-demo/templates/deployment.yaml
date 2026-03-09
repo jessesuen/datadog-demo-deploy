@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: dd-rollouts-demo
+  name: datadog-demo
   namespace: {{ .Release.Namespace }}
   labels:
-    {{- include "dd-rollouts-demo.labels" . | nindent 4 }}
+    {{- include "datadog-demo.labels" . | nindent 4 }}
     tags.datadoghq.com/env: {{ .Values.env }}
-    tags.datadoghq.com/service: dd-rollouts-demo
+    tags.datadoghq.com/service: datadog-demo
     tags.datadoghq.com/version: {{ .Values.image.tag }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{- include "dd-rollouts-demo.selectorLabels" . | nindent 6 }}
+      {{- include "datadog-demo.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -20,9 +20,9 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "dd-rollouts-demo.selectorLabels" . | nindent 8 }}
+        {{- include "datadog-demo.selectorLabels" . | nindent 8 }}
         tags.datadoghq.com/env: {{ .Values.env }}
-        tags.datadoghq.com/service: dd-rollouts-demo
+        tags.datadoghq.com/service: datadog-demo
         tags.datadoghq.com/version: {{ .Values.image.tag }}
     spec:
       {{- with .Values.imagePullSecrets }}
