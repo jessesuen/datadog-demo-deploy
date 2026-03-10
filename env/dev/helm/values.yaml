@@ -8,7 +8,7 @@ replicaCount: 1
 ingress:
   enabled: true
   hosts:
-    - host: kargo-demo-dev.demo.akuity.io
+    - host: datadog-demo-dev.demo.akuity.io
       paths:
         - path: /
           pathType: ImplementationSpecific
