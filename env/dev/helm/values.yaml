@@ -1,4 +1,4 @@
-env: dev
+environment: dev
 
 image:
   tag: 0.1.0

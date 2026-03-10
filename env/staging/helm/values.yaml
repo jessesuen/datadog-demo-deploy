@@ -1,4 +1,4 @@
-env: staging
+environment: staging
 
 image:
   tag: 0.1.0

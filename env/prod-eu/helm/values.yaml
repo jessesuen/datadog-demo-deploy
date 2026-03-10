@@ -1,4 +1,4 @@
-env: prod-eu
+environment: prod-eu
 
 image:
   tag: v0.1.0
