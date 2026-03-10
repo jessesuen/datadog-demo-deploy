@@ -1,7 +1,7 @@
 environment: prod-eu
 
 image:
-  tag: 0.1.0
+  tag: 0.2.0
 
 replicaCount: 1
 
@@ -14,4 +14,4 @@ ingress:
           pathType: ImplementationSpecific
 
 env:
-  LAMBDA_URL: https://evplpxotwcuolvscvv4ufe44zm0ewpje.lambda-url.us-west-2.on.aws/
+  LAMBDA_URL: https://swmfgmz6nxsoxxov23dds3iys40dxpah.lambda-url.us-west-2.on.aws/
