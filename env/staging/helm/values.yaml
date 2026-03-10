@@ -1,7 +1,7 @@
 environment: staging
 
 image:
-  tag: 0.3.0
+  tag: 0.4.0
 
 replicaCount: 1
 
@@ -14,4 +14,4 @@ ingress:
           pathType: ImplementationSpecific
 
 env:
-  LAMBDA_URL: https://peo2f4tsm7sbovbmcrj4prphyi0vdtxs.lambda-url.us-west-2.on.aws/
+  LAMBDA_URL: https://jbbhypdbbflfa5d3mmgd3q24xi0wzviz.lambda-url.us-west-2.on.aws/
