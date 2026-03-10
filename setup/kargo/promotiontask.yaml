@@ -33,15 +33,41 @@ spec:
       updates:
       - key: image_uri
         value: ${{ vars.lambda }}:${{ imageFrom(vars.lambda).Tag }}
+  - uses: tf-apply
+    as: tf-apply
+    config:
+      dir: ./src/env/${{ ctx.stage }}/terraform
+      # plan: ./plan.tfplan
+      env:
+      - name: AWS_REGION
+        value: us-west-2
+      - name: AWS_ACCESS_KEY_ID
+        value: ${{ secret('lambda-ecr').awsAccessKeyID }}
+      - name: AWS_SECRET_ACCESS_KEY
+        value: ${{ secret('lambda-ecr').awsSecretAccessKey }}
+  - uses: tf-output
+    as: tf-output
+    config:
+      dir: ./src/env/${{ ctx.stage }}/terraform
   - uses: git-commit
     as: commit
     config:
       path: ./src
       message: |
-        Update ${{ ctx.stage }} to ${{ ctx.targetFreight.name }}
+        Update ${{ ctx.stage }} to `${{ ctx.targetFreight.name }}`
 
-        K8s Image: ${{ vars.image }}:${{ imageFrom(vars.image).Tag }}
-        Lambda: ${{ vars.lambda }}:${{ imageFrom(vars.lambda).Tag }}
+        K8s Image: `${{ vars.image }}:${{ imageFrom(vars.image).Tag }}`
+        Lambda: `${{ vars.lambda }}:${{ imageFrom(vars.lambda).Tag }}`
+
+        Terraform Apply:
+        ```
+        ${{ task.outputs['tf-apply'].result }}
+        ```
+
+        Terraform Outputs:
+        ```
+        ${{ task.outputs['tf-output'] }}
+        ```
   - uses: git-push
     config:
       path: ./src
