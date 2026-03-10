@@ -33,3 +33,6 @@ resources: {}
 
 postSyncJob:
   enabled: true
+
+env:
+  LAMBDA_URL: https://xxxxxxxxxxxxxxxxx.lambda-url.us-west-2.on.aws/

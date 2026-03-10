@@ -21,12 +21,6 @@ spec:
       checkout:
       - branch: ${{ vars.branch }}
         path: ./src
-  - uses: yaml-update
-    config:
-      path: ./src/env/${{ ctx.stage }}/helm/values.yaml
-      updates:
-      - key: image.tag
-        value: ${{ imageFrom( vars.image ).Tag }}
   - uses: hcl-update
     config:
       path: ./src/env/${{ ctx.stage }}/terraform/env.auto.tfvars
@@ -49,25 +43,27 @@ spec:
     as: tf-output
     config:
       dir: ./src/env/${{ ctx.stage }}/terraform
+  - uses: yaml-update
+    config:
+      path: ./src/env/${{ ctx.stage }}/helm/values.yaml
+      updates:
+      - key: image.tag
+        value: ${{ imageFrom( vars.image ).Tag }}
+      - key: env.LAMBDA_URL
+        value: ${{ task.outputs['tf-output'].lambda_url.value }}
   - uses: git-commit
     as: commit
     config:
       path: ./src
       message: |
-        Update ${{ ctx.stage }} to `${{ ctx.targetFreight.name }}`
+        Update ${{ ctx.stage }} to ${{ ctx.targetFreight.name }}
 
-        K8s Image: `${{ vars.image }}:${{ imageFrom(vars.image).Tag }}`
-        Lambda: `${{ vars.lambda }}:${{ imageFrom(vars.lambda).Tag }}`
+        K8s Image: ${{ vars.image }}:${{ imageFrom(vars.image).Tag }}
+        Lambda: ${{ vars.lambda }}:${{ imageFrom(vars.lambda).Tag }}
 
         Terraform Apply:
-        ```
         ${{ task.outputs['tf-apply'].result }}
-        ```
 
-        Terraform Outputs:
-        ```
-        ${{ task.outputs['tf-output'] }}
-        ```
   - uses: git-push
     config:
       path: ./src
