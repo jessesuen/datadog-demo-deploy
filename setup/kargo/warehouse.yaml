@@ -8,3 +8,6 @@ spec:
   - image:
       repoURL: ghcr.io/jessesuen/datadog-demo
       imageSelectionStrategy: SemVer
+  - image:
+      repoURL: 541216676946.dkr.ecr.us-west-2.amazonaws.com/datadog-demo/lambda-app
+      imageSelectionStrategy: SemVer

@@ -1,0 +1,51 @@
+apiVersion: kargo.akuity.io/v1alpha1
+kind: PromotionTask
+metadata:
+  name: promote
+  namespace: datadog-demo
+spec:
+  vars:
+  - name: image
+    value: ghcr.io/jessesuen/datadog-demo
+  - name: lambda
+    value: 541216676946.dkr.ecr.us-west-2.amazonaws.com/datadog-demo/lambda-app
+  - name: repoURL
+    value: https://github.com/jessesuen/datadog-demo-deploy.git
+  - name: branch
+    value: main
+
+  steps:
+  - uses: git-clone
+    config:
+      repoURL: ${{ vars.repoURL }}
+      checkout:
+      - branch: ${{ vars.branch }}
+        path: ./src
+  - uses: yaml-update
+    config:
+      path: ./src/env/${{ ctx.stage }}/helm/values.yaml
+      updates:
+      - key: image.tag
+        value: ${{ imageFrom( vars.image ).Tag }}
+  - uses: hcl-update
+    config:
+      path: ./src/env/${{ ctx.stage }}/terraform/env.auto.tfvars
+      updates:
+      - key: image_uri
+        value: ${{ vars.lambda }}:${{ imageFrom(vars.lambda).Tag }}
+  - uses: git-commit
+    as: commit
+    config:
+      path: ./src
+      message: |
+        Update ${{ ctx.stage }} to ${{ ctx.targetFreight.name }}
+
+        K8s Image: ${{ vars.image }}:${{ imageFrom(vars.image).Tag }}
+        Lambda: ${{ vars.lambda }}:${{ imageFrom(vars.lambda).Tag }}
+  - uses: git-push
+    config:
+      path: ./src
+  - uses: argocd-update
+    config:
+      apps:
+      - name: datadog-demo-${{ ctx.stage }}

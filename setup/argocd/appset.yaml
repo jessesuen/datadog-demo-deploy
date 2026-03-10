@@ -25,4 +25,4 @@ spec:
         repoURL: https://github.com/jessesuen/datadog-demo-deploy.git
         helm:
           valueFiles:
-          - "/env/{{path.basename}}/values.yaml"
+          - "/env/{{path.basename}}/helm/values.yaml"

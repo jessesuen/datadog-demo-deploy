@@ -11,12 +11,11 @@ spec:
   - count: 3
     failureCondition: default(result, 0) > 0
     failureLimit: 1
-    interval: 30s
+    interval: 20s
     name: error-rate
     provider:
       datadog:
         apiVersion: v2
         interval: 5m
-        # sum:requests.error.rate{service:{{args.service-name}}}
-        query: |
-          apm.service.request.error_rate{env:{{args.env}},service:{{args.service-name}}}
+        query: sum:requests.error.rate{env:{{args.env}},service:{{args.service-name}}}
+        #query: apm.service.request.error_rate{env:{{args.env}},service:{{args.service-name}}}

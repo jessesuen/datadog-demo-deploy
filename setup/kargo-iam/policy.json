@@ -1,0 +1,70 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ecr:CompleteLayerUpload",
+                "ecr:UploadLayerPart",
+                "ecr:InitiateLayerUpload",
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:PutImage",
+                "ecr:BatchGetImage",
+                "ecr:ListImages",
+                "ecr:GetDownloadUrlForLayer"
+            ],
+            "Resource": "arn:aws:ecr:us-west-2:541216676946:repository/datadog-demo/lambda-app"
+        },
+        {
+            "Effect": "Allow",
+            "Action": "ecr:GetAuthorizationToken",
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "lambda:AddPermission",
+                "lambda:CreateFunction",
+                "lambda:GetFunctionUrlConfig",
+                "lambda:CreateFunctionUrlConfig",
+                "lambda:UpdateFunctionUrlConfig",
+                "lambda:DeleteFunctionUrlConfig",
+                "lambda:update*",
+                "lambda:ListFunctions",
+                "lambda:GetFunction",
+                "lambda:DeleteFunction",
+                "lambda:InvokeFunction",
+                "lambda:ListVersionsByFunction"
+            ],
+            "Resource": [
+                "arn:aws:lambda:us-west-2:541216676946:function:datadog-demo-*",
+                "arn:aws:lambda:us-west-2:541216676946:function:datadog-demo-*:*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "iam:CreateRole",
+                "iam:CreatePolicy",
+                "iam:CreatePolicyVersion",
+                "iam:AttachRolePolicy",
+                "iam:PassRole",
+                "iam:GetRole",
+                "iam:GetPolicy",
+                "iam:GetPolicyVersion",
+                "iam:ListRolePolicies",
+                "iam:ListPolicyVersions",
+                "iam:ListAttachedRolePolicies",
+                "iam:ListInstanceProfilesForRole",
+                "iam:DetachRolePolicy",
+                "iam:DeleteRole",
+                "iam:DeletePolicy",
+                "iam:DeletePolicyVersion"
+            ],
+            "Resource": [
+                "arn:aws:iam::541216676946:policy/datadog-demo-*",
+                "arn:aws:iam::541216676946:role/datadog-demo-*"
+            ]
+        }
+    ]
+}
