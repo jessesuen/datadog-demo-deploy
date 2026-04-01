@@ -1,7 +1,7 @@
 image:
   repository: ghcr.io/jessesuen/otel-app
-  pullPolicy: IfNotPresent
-  tag: red
+  pullPolicy: Always
+  tag: 0.1.0
 
 replicaCount: 1
 

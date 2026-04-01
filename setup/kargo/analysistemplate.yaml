@@ -15,7 +15,13 @@ spec:
     name: error-rate
     provider:
       datadog:
-        apiVersion: v2
-        interval: 5m
-        query: sum:requests.error.rate{env:{{args.env}},service:{{args.service-name}}}
+        # apiVersion: v2
+        # interval: 5m
+        # query: sum:requests.error.rate{env:{{args.env}},service:{{args.service-name}}}
         #query: apm.service.request.error_rate{env:{{args.env}},service:{{args.service-name}}}
+        apiVersion: v2
+        formula: errors / hits
+        interval: 1m
+        queries:
+          errors: sum:trace.http.request.errors{env:{{args.env}},service:{{args.service-name}}}.as_rate()
+          hits: sum:trace.http.request.hits{env:{{args.env}},service:{{args.service-name}}}.as_rate()
