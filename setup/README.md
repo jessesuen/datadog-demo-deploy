@@ -7,11 +7,11 @@
 kargo apply -f kargo/
 
 # Enter PAT credentials
-kargo create credentials github \
-  --project datadog-demo \
+kargo create repo-credentials github \
   --git \
+  --project datadog-demo \
   --username akuitybot \
-  --repo-url https://github.com/jessesuen/datadog-demo-deploy
+  --repo-url https://github.com/jessesuen/datadog-demo-deploy.git
 
 # Use credentials from AWS user
 kargo apply -f - << EOF

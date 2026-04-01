@@ -1,0 +1,10 @@
+apiVersion: kargo.akuity.io/v1alpha1
+kind: ProjectConfig
+metadata:
+  name: datadog-demo
+  namespace: datadog-demo
+spec:
+  promotionPolicies:
+  - stageSelector:
+      name: staging
+    autoRollback: {}

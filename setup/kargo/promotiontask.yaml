@@ -6,7 +6,7 @@ metadata:
 spec:
   vars:
   - name: image
-    value: ghcr.io/jessesuen/datadog-demo
+    value: ghcr.io/jessesuen/otel-app
   - name: lambda
     value: 541216676946.dkr.ecr.us-west-2.amazonaws.com/datadog-demo/lambda-app
   - name: repoURL

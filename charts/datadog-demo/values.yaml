@@ -1,5 +1,5 @@
 image:
-  repository: ghcr.io/jessesuen/datadog-demo
+  repository: ghcr.io/jessesuen/otel-app
   pullPolicy: IfNotPresent
   tag: red
 
