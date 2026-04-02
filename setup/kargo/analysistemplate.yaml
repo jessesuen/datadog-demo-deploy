@@ -11,7 +11,7 @@ spec:
   metrics:
   - count: 4
     failureCondition: default(result, 0) > 0
-    failureLimit: 1
+    failureLimit: 0
     interval: 15s
     name: error-rate
     provider:
