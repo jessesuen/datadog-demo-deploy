@@ -12,7 +12,7 @@ spec:
   - count: 4
     failureCondition: default(result, 0) > 0
     failureLimit: 1
-    interval: 20s
+    interval: 15s
     name: error-rate
     provider:
       datadog:
