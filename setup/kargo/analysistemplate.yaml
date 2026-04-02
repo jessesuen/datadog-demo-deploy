@@ -5,23 +5,20 @@ metadata:
   namespace: datadog-demo
 spec:
   args:
-  - name: service-name
+  - name: service
   - name: env
+  - name: version
   metrics:
-  - count: 3
+  - count: 4
     failureCondition: default(result, 0) > 0
     failureLimit: 1
     interval: 20s
     name: error-rate
     provider:
       datadog:
-        # apiVersion: v2
-        # interval: 5m
-        # query: sum:requests.error.rate{env:{{args.env}},service:{{args.service-name}}}
-        #query: apm.service.request.error_rate{env:{{args.env}},service:{{args.service-name}}}
         apiVersion: v2
         formula: errors / hits
-        interval: 1m
+        interval: 1m  # minimum 1m or else no metrics are returned
         queries:
-          errors: sum:trace.http.request.errors{env:{{args.env}},service:{{args.service-name}}}.as_rate()
-          hits: sum:trace.http.request.hits{env:{{args.env}},service:{{args.service-name}}}.as_rate()
+          errors: sum:trace.http.request.errors{env:{{args.env}},service:{{args.service}},version:{{args.version}}}.as_rate()
+          hits: sum:trace.http.request.hits{env:{{args.env}},service:{{args.service}},version:{{args.version}}}.as_rate()

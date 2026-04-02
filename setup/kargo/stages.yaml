@@ -22,10 +22,12 @@ spec:
     analysisTemplates:
     - name: apm-error-rate
     args:
-    - name: service-name
+    - name: service
       value: datadog-demo
     - name: env
       value: dev
+    - name: version
+      value: ${{ imageFrom( "ghcr.io/jessesuen/otel-app" ).Tag }}
 
 ---
 apiVersion: kargo.akuity.io/v1alpha1
@@ -53,11 +55,12 @@ spec:
     analysisTemplates:
     - name: apm-error-rate
     args:
-    - name: service-name
+    - name: service
       value: datadog-demo
     - name: env
       value: staging
-
+    - name: version
+      value: ${{ imageFrom( "ghcr.io/jessesuen/otel-app" ).Tag }}
 
 ---
 apiVersion: kargo.akuity.io/v1alpha1
@@ -85,10 +88,12 @@ spec:
     analysisTemplates:
     - name: apm-error-rate
     args:
-    - name: service-name
+    - name: service
       value: datadog-demo
     - name: env
       value: prod-us
+    - name: version
+      value: ${{ imageFrom( "ghcr.io/jessesuen/otel-app" ).Tag }}
 
 ---
 apiVersion: kargo.akuity.io/v1alpha1
@@ -116,7 +121,9 @@ spec:
     analysisTemplates:
     - name: apm-error-rate
     args:
-    - name: service-name
+    - name: service
       value: datadog-demo
     - name: env
       value: prod-eu
+    - name: version
+      value: ${{ imageFrom( "ghcr.io/jessesuen/otel-app" ).Tag }}
