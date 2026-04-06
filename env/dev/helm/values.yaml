@@ -14,4 +14,4 @@ ingress:
           pathType: ImplementationSpecific
 
 env:
-  LAMBDA_URL: https://sgkyqpzionaxze5xlu4434efxu0grphr.lambda-url.us-west-2.on.aws/
+  LAMBDA_URL: https://xw3ynbd5o2krt44oregzyd7zly0pfrhd.lambda-url.us-west-2.on.aws/
